@@ -1,3 +1,4 @@
+import { buildTripoRequestBody, TRIPO_MODEL } from './tripo.ts';
 import type {
   DescribeResult,
   PlatformConfig,
@@ -426,7 +427,7 @@ export function buildCrunRequestBody(
   model: string,
   payload: Record<string, any>
 ): Record<string, any> {
-  return isCrunImageExpandModel(model)
+  return model === TRIPO_MODEL ? buildTripoRequestBody(payload) : isCrunImageExpandModel(model)
     ? buildCrunImageExpandRequestBody(model, payload)
     : isCrunWatermarkRemoveModel(model)
     ? buildCrunWatermarkRemoveRequestBody(model, payload)
